@@ -256,25 +256,48 @@ function demo() {
 }
 
 // ==========================================
-// SHARE FUNCTIONS
+// SHARE FUNCTIONS (Viral-Optimized Messages)
 // ==========================================
 function shareWhatsApp() {
     const link = document.getElementById('res-link').value;
-    const text = `Hey ${generatedData.t}, about that ${generatedData.c}${generatedData.a} you owe me... 👀`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(text + '\n\n' + link)}`, '_blank');
+    const sassLevel = generatedData.s;
+    let text = '';
+    
+    if (sassLevel <= 2) {
+        text = `Hey ${generatedData.t}! 😊\n\nJust a friendly little reminder about that ${generatedData.c}${generatedData.a} for the ${generatedData.w}.\n\nI made you a special page 👇\n${link}\n\nNo rush! ...okay maybe a little rush 😅`;
+    } else if (sassLevel <= 3) {
+        text = `${generatedData.t}... we need to talk. 😤\n\n${generatedData.c}${generatedData.a} for ${generatedData.w}.\n\nI've created an official reminder page for you 👇\n${link}\n\nThe guilt-meter is watching. ⏰`;
+    } else if (sassLevel === 4) {
+        text = `🔥 ATTENTION: ${generatedData.t.toUpperCase()} 🔥\n\n📋 DEBT COLLECTION NOTICE\n💰 Amount: ${generatedData.c}${generatedData.a}\n📝 For: ${generatedData.w}\n⚠️ Status: OVERDUE\n\nYour official reminder page 👇\n${link}\n\nPay now before this goes to the group chat. 😤`;
+    } else {
+        text = `⚠️ FINAL NOTICE ⚠️\n\nTo: ${generatedData.t.toUpperCase()}\nFrom: The Office of ${generatedData.f}\n\n📋 CASE FILE #${Math.floor(Math.random() * 9000) + 1000}\n💰 Outstanding: ${generatedData.c}${generatedData.a}\n📝 Subject: ${generatedData.w}\n⏰ Status: CRITICAL — LEGAL ESCALATION PENDING\n\n👇 YOUR DEDICATED COLLECTION PAGE:\n${link}\n\nScreenshots have been archived. Group chats have been notified. There is no escape. ☢️`;
+    }
+    
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
 }
 
 function shareTwitter() {
     const link = document.getElementById('res-link').value;
-    const text = `Someone owes me money. So I did the only reasonable thing... 😤💸`;
+    const texts = [
+        `Someone owes me ${generatedData.c}${generatedData.a} so I built them an entire website about it. The drama level is set to ${['Gentle','Passive','Annoyed','FURIOUS','☢️ NUCLEAR'][generatedData.s - 1]}. 😤💸`,
+        `POV: Your friend won't pay you back so you create an entire passive-aggressive landing page with a guilt-o-meter and countdown timer 💀😤`,
+        `I just sent my friend a "FINAL NOTICE: LEGAL ESCALATION PENDING" page because they owe me ${generatedData.c}${generatedData.a}. This is what happens when you don't pay up 🔥`
+    ];
+    const text = texts[Math.floor(Math.random() * texts.length)];
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`, '_blank');
 }
 
 function shareEmail() {
     const link = document.getElementById('res-link').value;
-    const subject = `Friendly Reminder: You Owe ${generatedData.c}${generatedData.a} 💸`;
-    const body = `Hey ${generatedData.t},\n\nJust a little reminder about that ${generatedData.c}${generatedData.a} for ${generatedData.w}.\n\nI made this for you: ${link}\n\nNo rush... actually, yes rush. 😤\n\n- ${generatedData.f}`;
+    const subject = `⚠️ Outstanding Balance: ${generatedData.c}${generatedData.a} — Action Required`;
+    const body = `Dear ${generatedData.t},\n\nThis email serves as a formal reminder regarding the outstanding balance of ${generatedData.c}${generatedData.a} for ${generatedData.w}.\n\nA dedicated collection page has been prepared for your review:\n${link}\n\nPlease resolve this matter at your earliest convenience.\n\nRegards,\n${generatedData.f}\nDebt Recovery Department`;
     window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+}
+
+function shareTelegram() {
+    const link = document.getElementById('res-link').value;
+    const text = `⚠️ DEBT NOTICE for ${generatedData.t}: ${generatedData.c}${generatedData.a} for ${generatedData.w}. Your collection page is ready 👇`;
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`, '_blank');
 }
 
 // ==========================================
