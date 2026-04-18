@@ -431,52 +431,34 @@ function renderReminder(data) {
     const intRate = 0.01 * data.s;
     const finalAmount = (data.a * Math.pow(1 + intRate, diffDays)).toFixed(2);
     
-    let greeting = "", stamp = "", guiltText = "", warn = "";
-    
-    switch (data.s) {
-        case 1:
-            greeting = `Hello <strong>${data.t}</strong>! 👋 Hope everything is wonderful. Just a gentle, friendly reminder regarding the <em>${data.w}</em>. Totally no rush — whenever you get a chance! 😊`;
-            stamp = "FRIENDLY NUDGE";
-            warn = "Whenever you have a moment. No rush at all!";
-            guiltText = "Vibe check: Positive. Zero guilt applied.";
-            break;
-        case 2:
-            greeting = `Hey <strong>${data.t}</strong>... 😏 I was reviewing my recent expenses and noticed a slight outstanding balance for the <em>${data.w}</em>. I'm <em>sure</em> it simply slipped your mind! ...Right?`;
-            stamp = "MILDLY UNPAID";
-            warn = "It would be highly appreciated if this could be cleared up soon.";
-            guiltText = "A minor blemish on your otherwise pristine reputation.";
-            break;
-        case 3:
-            greeting = `<strong>${data.t}</strong>. 😤 It has been <strong>${diffDays} days</strong>. I've maintained my patience regarding the <em>${data.w}</em>, but we're well past the point of "oh I forgot." It's time to settle up.`;
-            stamp = "UNPAID";
-            warn = "The patience window is closing. Settle the balance now.";
-            guiltText = "Conscience tracker actively pinging your ledger.";
-            break;
-        case 4:
-            greeting = `Are we running a charity here, <strong>${data.t.toUpperCase()}</strong>?! 🔥 This is the <strong>FINAL standard warning</strong> concerning the <em>${data.w}</em> balance. I've been MORE than patient. My saint era is officially OVER.`;
-            stamp = "OVERDUE 🔥";
-            warn = "IMMEDIATE RESOLUTION REQUIRED to prevent awkward group chat discussions.";
-            guiltText = "SEVERITY MAXIMUM. Reputation impairment imminent.";
-            break;
-        case 5:
-            greeting = `⚠️ <strong style="font-size: 1.15rem;">FINAL NOTICE — ESCALATION PENDING</strong> ⚠️<br><br>The outstanding balance for <strong>${data.t.toUpperCase()}</strong> regarding <em>[${data.w}]</em> has been flagged for <strong>IMMEDIATE COLLECTION</strong>.<br><br><div class="countdown-timer" id="doom-clock">24:00:00:00</div><br>Failure to remit payment within the designated timeframe may result in severe social and financial consequences. Screenshots have been archived. Group chats have been warned.`;
-            stamp = "FINAL NOTICE";
-            warn = "⚠️ DO NOT IGNORE. SETTLE DEBT IMMEDIATELY.";
-            guiltText = "YOUR FINANCIAL AND SOCIAL STANDING IS AT CRITICAL RISK.";
-            
-            let timeLeft = 24 * 3600;
-            window.doomInterval = setInterval(() => {
-                const el = document.getElementById('doom-clock');
-                if (!el) return clearInterval(window.doomInterval);
-                timeLeft -= 0.05;
-                if (timeLeft <= 0) timeLeft = 0;
-                const h = Math.floor(timeLeft / 3600);
-                const m = Math.floor((timeLeft % 3600) / 60);
-                const s = Math.floor(timeLeft % 60);
-                const ms = Math.floor((timeLeft % 1) * 100);
-                el.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`;
-            }, 50);
-            break;
+    const lang = data.l || 'en';
+    const T = (window.i18n && window.i18n[lang]) ? window.i18n[lang] : window.i18n['en'];
+
+    const format = (str) => {
+        return str.replace(/{t}/g, data.t.toUpperCase())
+                  .replace(/{w}/g, data.w)
+                  .replace(/{d}/g, diffDays);
+    };
+
+    const s = data.s;
+    const stamp = T[`s${s}_stamp`];
+    const greeting = format(T[`s${s}_greet`]);
+    const warn = T[`s${s}_warn`];
+    const guiltText = T[`s${s}_guilt`];
+
+    if (s === 5) {
+        let timeLeft = 24 * 3600;
+        window.doomInterval = setInterval(() => {
+            const el = document.getElementById('doom-clock');
+            if (!el) return clearInterval(window.doomInterval);
+            timeLeft -= 0.05;
+            if (timeLeft <= 0) timeLeft = 0;
+            const h = Math.floor(timeLeft / 3600);
+            const m = Math.floor((timeLeft % 3600) / 60);
+            const sec = Math.floor(timeLeft % 60);
+            const ms = Math.floor((timeLeft % 1) * 100);
+            el.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`;
+        }, 50);
     }
     
     document.getElementById('r-stamp').textContent = stamp;
@@ -485,15 +467,15 @@ function renderReminder(data) {
     document.getElementById('r-from').textContent = data.f;
     
     if (diffDays > 0) {
-        document.getElementById('r-int').innerHTML = `With emotional interest: <strong>${data.c}${parseFloat(finalAmount).toLocaleString()}</strong>`;
-        document.getElementById('r-days').textContent = `Overdue by ${diffDays} days`;
+        document.getElementById('r-int').innerHTML = `${T.int_with} <strong>${data.c}${parseFloat(finalAmount).toLocaleString()}</strong>`;
+        document.getElementById('r-days').textContent = T.overdue_days.replace('{d}', diffDays);
     } else {
-        document.getElementById('r-int').textContent = "Clock starts ticking today.";
-        document.getElementById('r-days').textContent = "Due Today";
+        document.getElementById('r-int').textContent = T.int_clock;
+        document.getElementById('r-days').textContent = T.due_today;
     }
     
     document.getElementById('r-reason').textContent = data.w;
-    document.getElementById('r-date').textContent = borrowDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('r-date').textContent = borrowDate.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' });
     
     // Guilt meter
     const maxDays = 60;
@@ -506,6 +488,17 @@ function renderReminder(data) {
     document.getElementById('r-guilt-pct').textContent = Math.round(guiltPct) + '%';
     document.getElementById('r-guilt-text').textContent = guiltText;
     document.getElementById('r-warn').textContent = warn;
+
+    // Apply translations to static labels
+    if(document.getElementById('lbl-out_bal')) document.getElementById('lbl-out_bal').textContent = T.out_bal;
+    if(document.getElementById('lbl-desc')) document.getElementById('lbl-desc').textContent = T.desc;
+    if(document.getElementById('lbl-date_inc')) document.getElementById('lbl-date_inc').textContent = T.date_inc;
+    if(document.getElementById('lbl-status')) document.getElementById('lbl-status').textContent = T.status;
+    if(document.getElementById('lbl-creditor')) document.getElementById('lbl-creditor').textContent = T.creditor;
+    if(document.getElementById('lbl-could_have')) document.getElementById('lbl-could_have').textContent = T.could_have;
+    if(document.getElementById('lbl-sev_index')) document.getElementById('lbl-sev_index').textContent = T.sev_index;
+    if(document.getElementById('lbl-settle_btn')) document.getElementById('lbl-settle_btn').textContent = T.settle_btn;
+    if(document.getElementById('lbl-footer_text')) document.getElementById('lbl-footer_text').textContent = T.footer_text;
     
     // What you could've bought
     const items = getCouldHaveBought(data.a);
