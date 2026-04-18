@@ -257,9 +257,16 @@ async function generate() {
     
     let finalLink = longLink;
     try {
-        const response = await fetch("https://tinyurl.com/api-create.php?url=" + encodeURIComponent(longLink));
+        // Try is.gd first (much cleaner, no intermediate page)
+        const response = await fetch("https://is.gd/create.php?format=simple&url=" + encodeURIComponent(longLink));
         if (response.ok) {
             finalLink = await response.text();
+        } else {
+            // Fallback to TinyURL if is.gd fails
+            const tinyResponse = await fetch("https://tinyurl.com/api-create.php?url=" + encodeURIComponent(longLink));
+            if (tinyResponse.ok) {
+                finalLink = await tinyResponse.text();
+            }
         }
     } catch(e) {
         console.error("Shortener failed, using long link", e);
