@@ -504,8 +504,13 @@ function renderReminder(data) {
     // Pay button
     const payBtn = document.getElementById('r-pay');
     if (data.p) {
-        let l = data.p;
-        if (!l.startsWith('http') && !l.startsWith('upi://')) l = 'https://' + l;
+        let l = data.p.trim();
+        // Smart detect bare UPI ID (has @, no slashes, not an email link)
+        if (l.includes('@') && !l.includes('/') && !l.startsWith('mailto:')) {
+            l = `upi://pay?pa=${l}&pn=${encodeURIComponent(data.f)}&am=${data.a}&cu=INR`;
+        } else if (!l.startsWith('http') && !l.startsWith('upi://')) {
+            l = 'https://' + l;
+        }
         payBtn.href = l;
         payBtn.style.display = 'inline-flex';
     } else {
