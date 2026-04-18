@@ -601,3 +601,29 @@ function submitPromise() {
     document.getElementById('postpone-modal').classList.remove('show');
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
 }
+
+// ==========================================
+// CHAI WIDGET LOGIC
+// ==========================================
+function toggleChai() {
+    document.getElementById('chai-card').classList.toggle('show');
+}
+
+function copyUPI(e) {
+    if (e) e.stopPropagation();
+    const upi = document.getElementById('upi-id').textContent;
+    const btn = e.target;
+    navigator.clipboard.writeText(upi).then(() => {
+        const oldText = btn.textContent;
+        btn.textContent = '✓';
+        setTimeout(() => { btn.textContent = oldText; }, 2000);
+    });
+}
+
+// Close chai card when clicking outside
+document.addEventListener('click', (e) => {
+    const float = document.querySelector('.chai-float');
+    if (float && !float.contains(e.target)) {
+        document.getElementById('chai-card').classList.remove('show');
+    }
+});

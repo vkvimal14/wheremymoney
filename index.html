@@ -438,6 +438,20 @@
         </div>
     </div>
 
+    <!-- Viral Tip / Buy Me a Chai (UPI Integration) -->
+    <div class="chai-float" onclick="toggleChai()">
+        <span class="chai-emoji">☕</span>
+        <div class="chai-card glass-card" id="chai-card">
+            <h4>Buy the Dev a Chai? ☕</h4>
+            <p>Loved the drama? Support the creator of WhereMyMoney!</p>
+            <div class="upi-box">
+                <code id="upi-id">vkvimal14@okhdfcbank</code>
+                <button class="btn btn-primary btn-sm" onclick="copyUPI(event)">Copy</button>
+            </div>
+            <a href="upi://pay?pa=vkvimal14@okhdfcbank&pn=Vimal&cu=INR" class="btn btn-ghost btn-sm" style="width:100%; margin-top:12px; font-size:0.75rem;">Pay via UPI App 📱</a>
+        </div>
+    </div>
+
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas"></canvas>
 

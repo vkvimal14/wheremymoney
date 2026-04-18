@@ -465,3 +465,44 @@ footer p { font-size: 0.85rem; color: var(--text-secondary); }
     transform: translateY(20px); transition: all 0.3s ease;
 }
 .modal.show .modal-content { transform: translateY(0); }
+
+/* Chai Float Widget */
+.chai-float {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.chai-emoji {
+    font-size: 2rem; background: var(--bg-card);
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    animation: floatBounce 3s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+.chai-float:hover .chai-emoji { transform: scale(1.1); }
+.chai-card {
+    position: absolute; bottom: 80px; right: 0; width: 280px;
+    padding: 24px; opacity: 0; pointer-events: none;
+    transform: translateY(10px) scale(0.95); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.chai-card.show { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+.chai-card h4 { margin-bottom: 8px; font-family: 'Outfit'; font-size: 1.1rem; }
+.chai-card p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.4; }
+.upi-box {
+    background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.upi-box code { font-size: 0.75rem; color: var(--accent-cyan); overflow: hidden; text-overflow: ellipsis; }
+
+@keyframes floatBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+    .chai-float { bottom: 20px; right: 20px; }
+    .chai-emoji { width: 50px; height: 50px; font-size: 1.5rem; }
+    .chai-card { width: 240px; }
+}
