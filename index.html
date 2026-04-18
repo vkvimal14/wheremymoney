@@ -272,6 +272,32 @@
                         <input type="text" id="v-pay" placeholder="upi://pay?... or PayPal.me/...">
                     </div>
                     
+                    <div class="form-group">
+                        <label>Debtor's Language 🌐</label>
+                        <select id="v-lang" style="width:100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255, 255, 255, 0.05); color: var(--text-primary); font-size: 1rem;">
+                            <optgroup label="Global Languages">
+                                <option value="en" selected>English</option>
+                                <option value="es">Spanish (Español)</option>
+                                <option value="fr">French (Français)</option>
+                                <option value="de">German (Deutsch)</option>
+                                <option value="zh">Chinese (中文)</option>
+                                <option value="ar">Arabic (العربية)</option>
+                                <option value="ru">Russian (Русский)</option>
+                                <option value="pt">Portuguese (Português)</option>
+                            </optgroup>
+                            <optgroup label="Indian Languages">
+                                <option value="hi">Hindi (हिंदी)</option>
+                                <option value="bn">Bengali (বাংলা)</option>
+                                <option value="te">Telugu (తెలుగు)</option>
+                                <option value="mr">Marathi (मराठी)</option>
+                                <option value="ta">Tamil (தமிழ்)</option>
+                                <option value="gu">Gujarati (ગુજરાતી)</option>
+                                <option value="kn">Kannada (ಕನ್ನಡ)</option>
+                                <option value="ml">Malayalam (മലയാളം)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    
                     <div style="display:flex; gap:16px;">
                         <button class="btn btn-ghost" style="flex:1;" onclick="goStep(2)">← Back</button>
                         <button class="btn btn-primary" style="flex:2;" onclick="generate()">🚀 Generate Link</button>
@@ -327,39 +353,39 @@
                 <div class="reminder-greeting" id="r-greet"></div>
                 
                 <div class="reminder-amount-box">
-                    <div class="reminder-amount-label">Outstanding Balance</div>
+                    <div class="reminder-amount-label" id="lbl-out_bal">Outstanding Balance</div>
                     <div class="reminder-amount" id="r-amt">$0</div>
                     <div class="reminder-interest" id="r-int"></div>
                 </div>
                 
                 <div class="detail-grid">
                     <div class="detail-item">
-                        <span class="detail-label">Description</span>
+                        <span class="detail-label" id="lbl-desc">Description</span>
                         <strong class="detail-value" id="r-reason">-</strong>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Date Incurred</span>
+                        <span class="detail-label" id="lbl-date_inc">Date Incurred</span>
                         <strong class="detail-value" id="r-date">-</strong>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Status</span>
+                        <span class="detail-label" id="lbl-status">Status</span>
                         <strong class="detail-value status-overdue" id="r-days">Overdue</strong>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Creditor</span>
+                        <span class="detail-label" id="lbl-creditor">Creditor</span>
                         <strong class="detail-value" id="r-from">-</strong>
                     </div>
                 </div>
 
                 <!-- What You Could've Bought (Guilt Enhancer) -->
                 <div class="could-have-bought" id="r-could-section">
-                    <div class="could-have-title">💸 What this money could've bought instead</div>
+                    <div class="could-have-title" id="lbl-could_have">💸 What this money could've bought instead</div>
                     <div class="could-have-grid" id="r-could-items"></div>
                 </div>
 
                 <div class="guilt-meter">
                     <div class="guilt-header">
-                        <span class="guilt-label">Severity Index</span>
+                        <span class="guilt-label" id="lbl-sev_index">Severity Index</span>
                         <span class="guilt-pct" id="r-guilt-pct">0%</span>
                     </div>
                     <div class="guilt-bar"><div class="guilt-fill" id="r-guilt-bar"></div></div>
@@ -368,13 +394,13 @@
 
                 <div class="reminder-cta">
                     <a id="r-pay" href="#" target="_blank" class="btn btn-primary btn-lg" style="text-decoration:none;">
-                        💳 Settle Balance Now
+                        <span id="lbl-settle_btn">💳 Settle Balance Now</span>
                     </a>
                     <p class="reminder-warn" id="r-warn"></p>
                 </div>
 
                 <div class="reminder-footer">
-                    <p>This reminder was generated on <a href="#" onclick="showSection('landing'); return false;" style="color: var(--accent-gold); text-decoration:none;">WhereMyMoney.fun</a></p>
+                    <p><span id="lbl-footer_text">This reminder was generated on</span> <a href="#" onclick="showSection('landing'); return false;" style="color: var(--accent-gold); text-decoration:none;">WhereMyMoney.fun</a></p>
                     <p class="text-muted" style="font-size: 0.75rem; margin-top: 4px;">Owe someone money? Create your own free reminder →</p>
                 </div>
             </div>
@@ -396,6 +422,7 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

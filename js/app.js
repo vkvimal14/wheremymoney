@@ -219,7 +219,8 @@ async function generate() {
         w: document.getElementById('v-reason').value.trim(),
         d: document.getElementById('v-date').value,
         p: document.getElementById('v-pay').value.trim(),
-        s: parseInt(document.querySelector('input[name="vsass"]:checked').value)
+        s: parseInt(document.querySelector('input[name="vsass"]:checked').value),
+        l: document.getElementById('v-lang') ? document.getElementById('v-lang').value : 'en'
     };
     
     const encoded = btoa(encodeURIComponent(JSON.stringify(generatedData)));
