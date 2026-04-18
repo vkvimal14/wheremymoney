@@ -113,9 +113,15 @@ function animateCounters() {
 // NAVIGATION
 // ==========================================
 function showSection(id, scrollToTop = true) {
-    document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-    const section = document.getElementById(id + '-section');
-    if (section) section.classList.remove('hidden');
+    const targetSection = document.getElementById(id + '-section');
+    if (!targetSection) return;
+
+    // Only hide others if the target is NOT already visible, 
+    // or if we are forced to re-init (e.g. from reminder back to landing)
+    if (targetSection.classList.contains('hidden')) {
+        document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+        targetSection.classList.remove('hidden');
+    }
     
     if (scrollToTop) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -180,6 +186,13 @@ function handleNavClick(e, targetSectionId, anchorId) {
         }
         window.history.pushState(null, null, '#' + anchorId);
     }, 50);
+}
+
+function goHome() {
+    if (window.location.hash !== '') {
+        window.history.pushState("", document.title, window.location.pathname + window.location.search);
+    }
+    showSection('landing');
 }
 
 // ==========================================
