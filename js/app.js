@@ -217,7 +217,8 @@ function generate() {
     };
     
     const encoded = btoa(encodeURIComponent(JSON.stringify(generatedData)));
-    const link = window.location.origin + window.location.pathname + '#r=' + encoded;
+    const cacheBust = "?v=" + new Date().getTime().toString(36);
+    const link = window.location.origin + window.location.pathname + cacheBust + '#r=' + encoded;
     
     document.getElementById('res-link').value = link;
     document.getElementById('res-t').textContent = generatedData.t;
