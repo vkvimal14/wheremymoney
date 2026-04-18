@@ -268,25 +268,34 @@ async function generate() {
     const cacheBust = "?v=" + new Date().getTime().toString(36);
     const longLink = 'https://vkvimal14.github.io/wheremymoney/' + cacheBust + '#r=' + encoded;
     
-    let finalLink = longLink;
-    try {
-        // Try is.gd first (much cleaner, no intermediate page)
-        const response = await fetch("https://is.gd/create.php?format=simple&url=" + encodeURIComponent(longLink));
-        if (response.ok) {
-            finalLink = await response.text();
-        } else {
-            // Fallback to TinyURL if is.gd fails
-            const tinyResponse = await fetch("https://tinyurl.com/api-create.php?url=" + encodeURIComponent(longLink));
-            if (tinyResponse.ok) {
-                finalLink = await tinyResponse.text();
-            }
-        }
-    } catch(e) {
-        console.error("Shortener failed, using long link", e);
-    }
-    
-    document.getElementById('res-link').value = finalLink;
+    // Set immediate long link first so user is never stuck
+    document.getElementById('res-link').value = longLink;
     document.getElementById('res-t').textContent = generatedData.t;
+
+    // Background Shortening with 3-second timeout
+    const shortenBackground = async () => {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second max wait
+
+            const response = await fetch("https://is.gd/create.php?format=simple&url=" + encodeURIComponent(longLink), {
+                signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
+
+            if (response.ok) {
+                const short = await response.text();
+                if (short.startsWith('http')) {
+                    document.getElementById('res-link').value = short;
+                }
+            }
+        } catch(e) {
+            console.warn("Background shortening failed or timed out:", e);
+        }
+    };
+
+    shortenBackground();
     
     if (btn) {
         btn.textContent = '🚀 Generate Link';
