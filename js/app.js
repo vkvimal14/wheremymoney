@@ -537,3 +537,39 @@ function renderReminder(data) {
         VanillaTilt.init(card, { max: 3, speed: 400, perspective: 1200 });
     }
 }
+
+// ==========================================
+// PROMISE LOGIC
+// ==========================================
+function submitPromise() {
+    const reason = document.getElementById('p-reason').value.trim();
+    const date = document.getElementById('p-date').value;
+    
+    if (!reason || !date) {
+        alert("You must provide both a reason and a date to plead your case.");
+        return;
+    }
+    
+    const parsedParams = new URL(document.location).hash;
+    const isReminder = parsedParams.startsWith('#r=');
+    let f = "Your Creditor";
+    let a = "the amount";
+    let c = "";
+    
+    if (isReminder) {
+        try {
+            const dataStr = atob(parsedParams.replace('#r=', ''));
+            const data = JSON.parse(decodeURIComponent(dataStr));
+            f = data.f;
+            a = data.a;
+            c = data.c;
+        } catch(e) {}
+    }
+    
+    const promiseDate = new Date(date).toLocaleDateString();
+    
+    const text = `Hey ${f}, I just saw your official "WhereMyMoney" debt notice for ${c}${a}.\n\nI genuinely can't pay right now because: ${reason}. 😔\n\nI solemnly swear to pay the full amount by ${promiseDate}. Please approve this extension! 🙏💸`;
+    
+    document.getElementById('postpone-modal').classList.remove('show');
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+}

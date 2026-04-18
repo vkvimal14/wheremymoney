@@ -396,6 +396,11 @@
                     <a id="r-pay" href="#" target="_blank" class="btn btn-primary btn-lg" style="text-decoration:none;">
                         <span id="lbl-settle_btn">💳 Settle Balance Now</span>
                     </a>
+                    
+                    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('postpone-modal').classList.add('show')" style="margin-top:16px;">
+                        I Can't Pay Yet (Request Extension)
+                    </button>
+                    
                     <p class="reminder-warn" id="r-warn"></p>
                 </div>
 
@@ -406,6 +411,29 @@
             </div>
         </div>
     </section>
+
+    <!-- Postpone Modal -->
+    <div class="modal" id="postpone-modal">
+        <div class="modal-content glass-card">
+            <h3 style="font-family: 'Outfit'; font-size:1.4rem; margin-bottom: 8px;">Request Extension 🏳️</h3>
+            <p class="text-muted" style="margin-bottom: 24px; font-size:0.9rem; line-height:1.5;">Submit a formal promise to your creditor. Note: This will generate a message for you to send to them.</p>
+            
+            <div class="form-group">
+                <label>Why can't you pay right now?</label>
+                <input type="text" id="p-reason" placeholder="e.g. Waiting for salary, dog ate my wallet">
+            </div>
+            
+            <div class="form-group">
+                <label>I solemnly promise to pay by:</label>
+                <input type="date" id="p-date">
+            </div>
+            
+            <div style="display:flex; gap:12px; margin-top:24px;">
+                <button class="btn btn-ghost" style="flex:1;" onclick="document.getElementById('postpone-modal').classList.remove('show')">Cancel</button>
+                <button class="btn btn-primary" style="flex:2;" onclick="submitPromise()">Send Promise 📝</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas"></canvas>

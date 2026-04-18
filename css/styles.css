@@ -449,3 +449,19 @@ footer p { font-size: 0.85rem; color: var(--text-secondary); }
     .create-container { padding: 28px; }
     .form-progress { font-size: 0.72rem; }
 }
+
+/* ---- Modal ---- */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.8); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    z-index: 1000; opacity: 0; pointer-events: none;
+    transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+}
+.modal.show { opacity: 1; pointer-events: all; }
+.modal-content {
+    background: var(--bg-secondary); border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg); padding: 32px; max-width: 480px; width: 100%;
+    transform: translateY(20px); transition: all 0.3s ease;
+}
+.modal.show .modal-content { transform: translateY(0); }
