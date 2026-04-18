@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhereMyMoney 💸 — The Premium Debt Reminder</title>
+    <meta name="description" content="The elegant, powerful, and beautifully dramatic way to remind someone they owe you.">
+    <meta property="og:title" content="WhereMyMoney — Someone owes you? We'll handle it.">
+    <meta property="og:description" content="Create beautifully passive-aggressive debt reminder pages. Share the link. Get paid.">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Monetization: Google AdSense Placeholder -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand" onclick="showSection('landing')">
+            <span class="nav-logo">💸</span> WhereMyMoney
+        </div>
+        <div class="nav-links">
+            <a href="#how" class="nav-link" onclick="showSection('landing')">How It Works</a>
+            <a href="#testimonials" class="nav-link" onclick="showSection('landing')">Testimonials</a>
+            <button class="btn btn-primary btn-sm" onclick="showSection('create')">Create Free</button>
+        </div>
+    </nav>
+
+    <!-- ===== LANDING ===== -->
+    <section class="section" id="landing-section">
+        
+        <!-- Hero -->
+        <div class="hero">
+            <div class="hero-badge animate-in">
+                <span class="badge-dot"></span> 
+                Now with 5 Sass Levels&nbsp;—&nbsp;from 😇 to ☢️
+            </div>
+            
+            <h1 class="hero-title animate-in">
+                <span class="hero-line">Where's My</span>
+                <span class="hero-line gradient-text">Money?</span>
+            </h1>
+            
+            <p class="hero-subtitle animate-in">
+                Create a beautifully crafted guilt-trip page. Share the link. 
+                Watch them scramble to pay you back.
+            </p>
+            
+            <div class="hero-cta animate-in">
+                <button class="btn btn-primary btn-lg" onclick="showSection('create')">
+                    Create Free Reminder
+                    <span class="btn-arrow">→</span>
+                </button>
+                <button class="btn btn-ghost btn-lg" onclick="demo()">See Live Example</button>
+            </div>
+            
+            <div class="hero-stats animate-in">
+                <div class="stat-item">
+                    <span class="stat-num" data-count="12847">0</span>
+                    <span class="stat-label">Reminders Sent</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num" data-count="89">0</span>
+                    <span class="stat-label">% Success Rate</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num" data-count="47">0</span>
+                    <span class="stat-label">Friendships Saved</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="section-header animate-in" id="how">
+            <span class="section-tag">How It Works</span>
+            <h2 class="section-title">Three steps to getting your money back</h2>
+        </div>
+        
+        <div class="grid-3">
+            <div class="step-card glass-card animate-in">
+                <div class="step-number">01</div>
+                <div class="step-icon-wrap"><span class="step-icon">✍️</span></div>
+                <h3>Configure</h3>
+                <p>Input the debtor's name, amount, and your desired level of passive-aggressive drama.</p>
+            </div>
+            <div class="step-card glass-card animate-in">
+                <div class="step-number">02</div>
+                <div class="step-icon-wrap"><span class="step-icon">🔗</span></div>
+                <h3>Generate</h3>
+                <p>We craft a cinematic, guilt-inducing landing page with animated severity metrics.</p>
+            </div>
+            <div class="step-card glass-card animate-in">
+                <div class="step-number">03</div>
+                <div class="step-icon-wrap"><span class="step-icon">💰</span></div>
+                <h3>Collect</h3>
+                <p>Share the link. The sheer passive intimidation compels them to settle immediately.</p>
+            </div>
+        </div>
+
+        <!-- Sass Level Preview -->
+        <div class="section-header animate-in" style="margin-top: 100px;">
+            <span class="section-tag">Intensity Levels</span>
+            <h2 class="section-title">Choose your weapon wisely</h2>
+        </div>
+        
+        <div class="sass-showcase animate-in">
+            <div class="sass-preview-card glass-card" data-level="1">
+                <div class="sass-preview-emoji">😇</div>
+                <div class="sass-preview-name">Gentle</div>
+                <div class="sass-preview-desc">"Hey! Just a friendly nudge about that…"</div>
+                <div class="sass-preview-bar"><div class="sass-preview-fill" style="width:20%; background: var(--accent-green);"></div></div>
+            </div>
+            <div class="sass-preview-card glass-card" data-level="2">
+                <div class="sass-preview-emoji">😏</div>
+                <div class="sass-preview-name">Passive</div>
+                <div class="sass-preview-desc">"Funny story, I noticed something…"</div>
+                <div class="sass-preview-bar"><div class="sass-preview-fill" style="width:40%; background: var(--accent-cyan);"></div></div>
+            </div>
+            <div class="sass-preview-card glass-card active" data-level="3">
+                <div class="sass-preview-emoji">😤</div>
+                <div class="sass-preview-name">Annoyed</div>
+                <div class="sass-preview-desc">"We need to talk. It's been a while…"</div>
+                <div class="sass-preview-bar"><div class="sass-preview-fill" style="width:60%; background: var(--accent-gold);"></div></div>
+            </div>
+            <div class="sass-preview-card glass-card" data-level="4">
+                <div class="sass-preview-emoji">🔥</div>
+                <div class="sass-preview-name">Furious</div>
+                <div class="sass-preview-desc">"ARE WE RUNNING A CHARITY?!"</div>
+                <div class="sass-preview-bar"><div class="sass-preview-fill" style="width:80%; background: var(--accent-red);"></div></div>
+            </div>
+            <div class="sass-preview-card glass-card" data-level="5">
+                <div class="sass-preview-emoji">☢️</div>
+                <div class="sass-preview-name">Nuclear</div>
+                <div class="sass-preview-desc">"⚠️ FINAL NOTICE. LEGAL ESCALATION…"</div>
+                <div class="sass-preview-bar"><div class="sass-preview-fill" style="width:100%; background: linear-gradient(90deg, var(--accent-red), #ff0000);"></div></div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="section-header animate-in" id="testimonials" style="margin-top: 100px;">
+            <span class="section-tag">Testimonials</span>
+            <h2 class="section-title">Loved by creditors everywhere</h2>
+        </div>
+        
+        <div class="testimonial-grid animate-in">
+            <div class="testimonial-card glass-card">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Sent my flatmate the Nuclear level. He Zelle'd me in 4 minutes. Literally did not speak for 2 days. Worth it."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">A</div>
+                    <div><strong>Ankit R.</strong><br><span class="text-muted">Recovered ₹2,400</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card glass-card">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"I used the Gentle level on my sister. She laughed, called me dramatic, then sent the money 3 hours later. This thing works."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">P</div>
+                    <div><strong>Priya S.</strong><br><span class="text-muted">Recovered $75</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card glass-card">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"The countdown timer on the FINAL NOTICE had my coworker physically panicking. Best $50 I ever recovered."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">J</div>
+                    <div><strong>James K.</strong><br><span class="text-muted">Recovered $50</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="final-cta animate-in" style="margin-top: 100px;">
+            <h2 class="section-title" style="margin-bottom: 16px;">Ready to get your money back?</h2>
+            <p class="text-muted" style="margin-bottom: 32px;">Free. No sign-up. Takes 30 seconds.</p>
+            <button class="btn btn-primary btn-lg" onclick="showSection('create')">
+                Create Your Reminder
+                <span class="btn-arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== CREATE FORM ===== -->
+    <section class="section hidden" id="create-section">
+        <div class="create-container glass-card">
+            <div class="form-progress">
+                <div class="progress-step active" id="prog-1"><span>1</span> Names</div>
+                <div class="progress-line"><div class="progress-line-fill" id="prog-fill"></div></div>
+                <div class="progress-step" id="prog-2"><span>2</span> Details</div>
+                <div class="progress-line"><div class="progress-line-fill" id="prog-fill-2"></div></div>
+                <div class="progress-step" id="prog-3"><span>3</span> Intensity</div>
+            </div>
+
+            <div id="reminder-form">
+                <!-- Step 1 -->
+                <div class="form-step active" id="step-1">
+                    <h3 class="form-step-title">Who owes you?</h3>
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="v-from" placeholder="e.g. Vimal">
+                    </div>
+                    <div class="form-group">
+                        <label>Their Name (The Debtor)</label>
+                        <input type="text" id="v-to" placeholder="e.g. Rahul">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%" onclick="goStep(2)">Continue →</button>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="form-step" id="step-2">
+                    <h3 class="form-step-title">The debt details</h3>
+                    <div style="display:flex; gap:16px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Currency</label>
+                            <select id="v-cur">
+                                <option value="$">$ USD</option>
+                                <option value="€">€ EUR</option>
+                                <option value="₹" selected>₹ INR</option>
+                                <option value="£">£ GBP</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:2;">
+                            <label>Amount</label>
+                            <input type="number" id="v-amt" placeholder="e.g. 500">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>What was it for?</label>
+                        <input type="text" id="v-reason" placeholder="e.g. Dinner, Uber split, Movie tickets">
+                    </div>
+                    <div class="form-group">
+                        <label>Date Borrowed</label>
+                        <input type="date" id="v-date">
+                    </div>
+                    <div style="display:flex; gap:16px;">
+                        <button class="btn btn-ghost" style="flex:1;" onclick="goStep(1)">← Back</button>
+                        <button class="btn btn-primary" style="flex:2;" onclick="goStep(3)">Continue →</button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="form-step" id="step-3">
+                    <h3 class="form-step-title">Choose your weapon</h3>
+                    <div class="sass-selector">
+                        <label class="sass-option"><input type="radio" name="vsass" value="1"><div class="sass-content"><span class="sass-emoji">😇</span><span class="sass-label">Gentle</span></div></label>
+                        <label class="sass-option"><input type="radio" name="vsass" value="2"><div class="sass-content"><span class="sass-emoji">😏</span><span class="sass-label">Passive</span></div></label>
+                        <label class="sass-option"><input type="radio" name="vsass" value="3" checked><div class="sass-content"><span class="sass-emoji">😤</span><span class="sass-label">Annoyed</span></div></label>
+                        <label class="sass-option"><input type="radio" name="vsass" value="4"><div class="sass-content"><span class="sass-emoji">🔥</span><span class="sass-label">Furious</span></div></label>
+                        <label class="sass-option"><input type="radio" name="vsass" value="5"><div class="sass-content"><span class="sass-emoji">☢️</span><span class="sass-label">Nuclear</span></div></label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Payment Link <span class="text-muted">(Optional)</span></label>
+                        <input type="text" id="v-pay" placeholder="upi://pay?... or PayPal.me/...">
+                    </div>
+                    
+                    <div style="display:flex; gap:16px;">
+                        <button class="btn btn-ghost" style="flex:1;" onclick="goStep(2)">← Back</button>
+                        <button class="btn btn-primary" style="flex:2;" onclick="generate()">🚀 Generate Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RESULT ===== -->
+    <section class="section hidden" id="result-section">
+        <div class="result-container glass-card">
+            <div class="result-success-icon">✅</div>
+            <h2 class="heading-outfit" style="font-size: 1.8rem; margin-bottom: 12px;">Your Reminder is Ready</h2>
+            <p class="text-muted" style="margin-bottom: 32px;">Share this link with <strong id="res-t" style="color:var(--text-primary);"></strong> and watch the magic happen.</p>
+            
+            <div class="link-box">
+                <input type="text" id="res-link" readonly onclick="this.select()">
+                <button class="btn btn-primary" id="copy-btn" onclick="copyLink()">Copy</button>
+            </div>
+            
+            <div class="share-grid">
+                <button class="share-btn" onclick="preview()">
+                    <span class="share-icon">👁️</span>
+                    <span>Preview</span>
+                </button>
+                <button class="share-btn" onclick="shareWhatsApp()">
+                    <span class="share-icon">💬</span>
+                    <span>WhatsApp</span>
+                </button>
+                <button class="share-btn" onclick="shareTwitter()">
+                    <span class="share-icon">𝕏</span>
+                    <span>Twitter</span>
+                </button>
+                <button class="share-btn" onclick="shareEmail()">
+                    <span class="share-icon">📧</span>
+                    <span>Email</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== REMINDER VIEWER ===== -->
+    <section class="section hidden" id="reminder-section">
+        <div class="reminder-container glass-card" id="rem-card">
+            <div class="reminder-body">
+                <div class="reminder-stamp" id="r-stamp">UNPAID</div>
+                
+                <div class="reminder-greeting" id="r-greet"></div>
+                
+                <div class="reminder-amount-box">
+                    <div class="reminder-amount-label">Outstanding Balance</div>
+                    <div class="reminder-amount" id="r-amt">$0</div>
+                    <div class="reminder-interest" id="r-int"></div>
+                </div>
+                
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Description</span>
+                        <strong class="detail-value" id="r-reason">-</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Date Incurred</span>
+                        <strong class="detail-value" id="r-date">-</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Status</span>
+                        <strong class="detail-value status-overdue" id="r-days">Overdue</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Creditor</span>
+                        <strong class="detail-value" id="r-from">-</strong>
+                    </div>
+                </div>
+
+                <!-- What You Could've Bought (Guilt Enhancer) -->
+                <div class="could-have-bought" id="r-could-section">
+                    <div class="could-have-title">💸 What this money could've bought instead</div>
+                    <div class="could-have-grid" id="r-could-items"></div>
+                </div>
+
+                <div class="guilt-meter">
+                    <div class="guilt-header">
+                        <span class="guilt-label">Severity Index</span>
+                        <span class="guilt-pct" id="r-guilt-pct">0%</span>
+                    </div>
+                    <div class="guilt-bar"><div class="guilt-fill" id="r-guilt-bar"></div></div>
+                    <div class="guilt-text" id="r-guilt-text">Computing parameters...</div>
+                </div>
+
+                <div class="reminder-cta">
+                    <a id="r-pay" href="#" target="_blank" class="btn btn-primary btn-lg" style="text-decoration:none;">
+                        💳 Settle Balance Now
+                    </a>
+                    <p class="reminder-warn" id="r-warn"></p>
+                </div>
+
+                <div class="reminder-footer">
+                    <p>This reminder was generated on <a href="#" onclick="showSection('landing'); return false;" style="color: var(--accent-gold); text-decoration:none;">WhereMyMoney.fun</a></p>
+                    <p class="text-muted" style="font-size: 0.75rem; margin-top: 4px;">Owe someone money? Create your own free reminder →</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <footer>
+        <div class="footer-content">
+            <p>Built with 😤 Precision and Passive-Aggression</p>
+            <div class="footer-links">
+                <a href="https://www.buymeacoffee.com/yourusername" target="_blank" class="footer-link">☕ Buy me a coffee</a>
+                <span class="footer-dot">•</span>
+                <a href="#" onclick="showSection('create'); return false;" class="footer-link">Create Reminder</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
