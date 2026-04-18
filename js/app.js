@@ -225,7 +225,7 @@ async function generate() {
     
     const encoded = btoa(encodeURIComponent(JSON.stringify(generatedData)));
     const cacheBust = "?v=" + new Date().getTime().toString(36);
-    const longLink = window.location.origin + window.location.pathname + cacheBust + '#r=' + encoded;
+    const longLink = 'https://vkvimal14.github.io/wheremymoney/' + cacheBust + '#r=' + encoded;
     
     let finalLink = longLink;
     try {
