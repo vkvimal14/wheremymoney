@@ -204,7 +204,13 @@ function shake(el) {
 // ==========================================
 let generatedData = null;
 
-function generate() {
+async function generate() {
+    const btn = document.querySelector('button[onclick="generate()"]');
+    if (btn) {
+        btn.textContent = '⏳ Compiling...';
+        btn.disabled = true;
+    }
+
     generatedData = {
         f: document.getElementById('v-from').value.trim(),
         t: document.getElementById('v-to').value.trim(),
@@ -218,10 +224,25 @@ function generate() {
     
     const encoded = btoa(encodeURIComponent(JSON.stringify(generatedData)));
     const cacheBust = "?v=" + new Date().getTime().toString(36);
-    const link = window.location.origin + window.location.pathname + cacheBust + '#r=' + encoded;
+    const longLink = window.location.origin + window.location.pathname + cacheBust + '#r=' + encoded;
     
-    document.getElementById('res-link').value = link;
+    let finalLink = longLink;
+    try {
+        const response = await fetch("https://tinyurl.com/api-create.php?url=" + encodeURIComponent(longLink));
+        if (response.ok) {
+            finalLink = await response.text();
+        }
+    } catch(e) {
+        console.error("Shortener failed, using long link", e);
+    }
+    
+    document.getElementById('res-link').value = finalLink;
     document.getElementById('res-t').textContent = generatedData.t;
+    
+    if (btn) {
+        btn.textContent = '🚀 Generate Link';
+        btn.disabled = false;
+    }
     
     showSection('result');
     launchConfetti();
