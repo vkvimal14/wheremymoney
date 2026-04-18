@@ -293,7 +293,7 @@
                 <button class="btn btn-primary" id="copy-btn" onclick="copyLink()">Copy</button>
             </div>
             
-            <div class="share-grid">
+            <div class="share-grid" style="grid-template-columns: repeat(5, 1fr);">
                 <button class="share-btn" onclick="preview()">
                     <span class="share-icon">👁️</span>
                     <span>Preview</span>
@@ -301,6 +301,10 @@
                 <button class="share-btn" onclick="shareWhatsApp()">
                     <span class="share-icon">💬</span>
                     <span>WhatsApp</span>
+                </button>
+                <button class="share-btn" onclick="shareTelegram()">
+                    <span class="share-icon">✈️</span>
+                    <span>Telegram</span>
                 </button>
                 <button class="share-btn" onclick="shareTwitter()">
                     <span class="share-icon">𝕏</span>
