@@ -112,11 +112,14 @@ function animateCounters() {
 // ==========================================
 // NAVIGATION
 // ==========================================
-function showSection(id) {
+function showSection(id, scrollToTop = true) {
     document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
     const section = document.getElementById(id + '-section');
     if (section) section.classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    if (scrollToTop) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     
     if (id === 'landing') {
         setTimeout(() => { initScrollReveal(); animateCounters(); }, 100);
@@ -150,8 +153,33 @@ function checkHash() {
                 return;
             }
         } catch (e) { console.error('Decode error:', e); }
+    } else if (hash === '#how' || hash === '#testimonials') {
+        if (document.getElementById('landing-section').classList.contains('hidden')) {
+            showSection('landing', false);
+        }
+        return;
     }
-    showSection('landing');
+    
+    if (!hash || hash === '' || !hash.startsWith('#how') && !hash.startsWith('#test')) {
+        showSection('landing');
+    }
+}
+
+function handleNavClick(e, targetSectionId, anchorId) {
+    e.preventDefault();
+    if (document.getElementById(targetSectionId + '-section').classList.contains('hidden')) {
+        showSection(targetSectionId, false);
+    }
+    
+    setTimeout(() => {
+        const el = document.getElementById(anchorId);
+        if (el) {
+            const yOffset = -80; // Offset for navbar
+            const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+        window.history.pushState(null, null, '#' + anchorId);
+    }, 50);
 }
 
 // ==========================================
