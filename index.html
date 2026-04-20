@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhereMyMoney 💸 — The Premium Debt Reminder</title>
-    <meta name="description" content="The elegant, powerful, and beautifully dramatic way to remind someone they owe you.">
+    <meta name="description" content="The elegant, powerful, and beautifully dramatic way to remind someone they owe you. Free. No sign-up. Takes 30 seconds.">
     
     <!-- Open Graph (Facebook, WhatsApp, Telegram, LinkedIn) -->
     <meta property="og:type" content="website">
@@ -18,9 +18,13 @@
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@wheremymoney_">
     <meta name="twitter:title" content="💸 Someone Owes You Money? We'll Handle The Drama.">
     <meta name="twitter:description" content="Create a beautifully passive-aggressive debt reminder. Share the link. Get paid.">
     <meta name="twitter:image" content="https://vkvimal14.github.io/wheremymoney/assets/og-image.jpg">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#030014">
     
     <link rel="stylesheet" href="css/styles.css">
     
@@ -31,22 +35,31 @@
     <canvas id="particles-canvas"></canvas>
     <div class="cursor-glow" id="cursor-glow"></div>
 
+    <!-- ========== NAVBAR ========== -->
     <nav class="navbar" id="navbar">
         <div class="nav-brand" onclick="goHome()">
             <span class="nav-logo">💸</span> WhereMyMoney
         </div>
         <div class="nav-links">
             <a href="#how" class="nav-link" onclick="handleNavClick(event, 'landing', 'how')">How It Works</a>
-            <a href="#testimonials" class="nav-link" onclick="handleNavClick(event, 'landing', 'testimonials')">Testimonials</a>
-            <button class="btn btn-primary btn-sm" onclick="showSection('create')">Create Free</button>
+            <a href="#testimonials" class="nav-link" onclick="handleNavClick(event, 'landing', 'testimonials')">Reviews</a>
+            <a href="#shame" class="nav-link" onclick="handleNavClick(event, 'landing', 'shame')">Hall of Shame</a>
+            <button class="btn btn-primary btn-sm" onclick="showSection('create')" id="nav-cta-btn">Create Free →</button>
         </div>
     </nav>
 
-    <!-- ===== LANDING ===== -->
+    <!-- ========== LANDING ========== -->
     <section class="section" id="landing-section">
         
         <!-- Hero -->
         <div class="hero">
+            <!-- Urgency Banner -->
+            <div class="urgency-banner animate-in">
+                <span class="fire-icon">🔥</span>
+                <span id="live-counter">1,247 people</span> are creating reminders right now
+                <span class="fire-icon">🔥</span>
+            </div>
+
             <div class="hero-badge animate-in">
                 <span class="badge-dot"></span> 
                 Now with 5 Sass Levels&nbsp;—&nbsp;from 😇 to ☢️
@@ -54,20 +67,20 @@
             
             <h1 class="hero-title animate-in">
                 <span class="hero-line">Where's My</span>
-                <span class="hero-line gradient-text">Money?</span>
+                <span class="hero-line gradient-text" id="hero-typewriter">Money?</span>
             </h1>
             
             <p class="hero-subtitle animate-in">
-                Create a beautifully crafted guilt-trip page. Share the link. 
-                Watch them scramble to pay you back.
+                Create a <strong style="color:var(--text-primary);">guilt-inducing masterpiece</strong> and share a link. 
+                Watch them scramble to pay you back — in minutes.
             </p>
             
             <div class="hero-cta animate-in">
-                <button class="btn btn-primary btn-lg" onclick="showSection('create')">
-                    Create Free Reminder
+                <button class="btn btn-cta-pulse btn-lg" onclick="showSection('create')" id="hero-main-btn">
+                    💸 Create Free Reminder
                     <span class="btn-arrow">→</span>
                 </button>
-                <button class="btn btn-ghost btn-lg" onclick="demo()">See Live Example</button>
+                <button class="btn btn-ghost btn-lg" onclick="demo()" id="hero-demo-btn">See Live Example</button>
             </div>
             
             <div class="hero-stats animate-in">
@@ -85,13 +98,18 @@
                     <span class="stat-num" data-count="47">0</span>
                     <span class="stat-label">Friendships Saved</span>
                 </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num" data-count="3">0</span>
+                    <span class="stat-label">Avg. Minutes to Pay</span>
+                </div>
             </div>
         </div>
 
         <!-- How It Works -->
-        <div class="section-header animate-in" id="how">
+        <div class="section-header animate-in" id="how" style="margin-top: 100px;">
             <span class="section-tag">How It Works</span>
-            <h2 class="section-title">Three steps to getting your money back</h2>
+            <h2 class="section-title">Three steps. Zero mercy.</h2>
         </div>
         
         <div class="grid-3">
@@ -99,23 +117,23 @@
                 <div class="step-number">01</div>
                 <div class="step-icon-wrap"><span class="step-icon">✍️</span></div>
                 <h3>Configure</h3>
-                <p>Input the debtor's name, amount, and your desired level of passive-aggressive drama.</p>
+                <p>Enter the debtor's name, amount, and your desired level of passive-aggressive drama. Choose weapons wisely.</p>
             </div>
             <div class="step-card glass-card animate-in">
                 <div class="step-number">02</div>
                 <div class="step-icon-wrap"><span class="step-icon">🔗</span></div>
                 <h3>Generate</h3>
-                <p>We craft a cinematic, guilt-inducing landing page with animated severity metrics.</p>
+                <p>We craft a cinematic, guilt-inducing landing page with animated severity metrics and shame leaderboard.</p>
             </div>
             <div class="step-card glass-card animate-in">
                 <div class="step-number">03</div>
                 <div class="step-icon-wrap"><span class="step-icon">💰</span></div>
                 <h3>Collect</h3>
-                <p>Share the link. The sheer passive intimidation compels them to settle immediately.</p>
+                <p>Share the link. The sheer psychological weight of our design compels immediate payment. Guaranteed drama.</p>
             </div>
         </div>
 
-        <!-- Sass Level Preview -->
+        <!-- Intensity Level Showcase -->
         <div class="section-header animate-in" style="margin-top: 100px;">
             <span class="section-tag">Intensity Levels</span>
             <h2 class="section-title">Choose your weapon wisely</h2>
@@ -154,10 +172,62 @@
             </div>
         </div>
 
+        <!-- Hall of Shame -->
+        <div class="shame-section animate-in" id="shame">
+            <div class="section-header" style="margin-bottom: 40px;">
+                <span class="section-tag">Hall of Shame 🏛️</span>
+                <h2 class="section-title">Famous Debtors of the Week</h2>
+                <p class="text-muted" style="margin-top: 12px; font-size: 0.9rem;">Real reminders. Real guilt. All names changed (or not 😏)</p>
+            </div>
+            <div class="shame-grid">
+                <div class="shame-card glass-card">
+                    <div class="shame-rank">#1 Most Wanted</div>
+                    <div class="shame-avatar">😤</div>
+                    <div class="shame-name">Rahul K.</div>
+                    <div class="shame-amount">₹4,500</div>
+                    <div class="shame-detail">For: "3 dinners + 1 Uber"</div>
+                    <div class="shame-detail" style="margin-top: 4px; color: var(--accent-red);">⏰ 94 days overdue</div>
+                    <span class="shame-badge badge-serial">Serial Borrower</span>
+                </div>
+                <div class="shame-card glass-card">
+                    <div class="shame-rank">#2 Ghost Mode</div>
+                    <div class="shame-avatar">👻</div>
+                    <div class="shame-name">Priya S.</div>
+                    <div class="shame-amount">$320</div>
+                    <div class="shame-detail">For: "Goa trip split"</div>
+                    <div class="shame-detail" style="margin-top: 4px; color: var(--accent-red);">⏰ 61 days overdue</div>
+                    <span class="shame-badge badge-ghost">Professional Ghoster</span>
+                </div>
+                <div class="shame-card glass-card">
+                    <div class="shame-rank">#3 Promise Breaker</div>
+                    <div class="shame-avatar">🤞</div>
+                    <div class="shame-name">Amit T.</div>
+                    <div class="shame-amount">₹2,200</div>
+                    <div class="shame-detail">For: "Concert tickets"</div>
+                    <div class="shame-detail" style="margin-top: 4px; color: var(--accent-gold);">🤝 3 broken promises</div>
+                    <span class="shame-badge badge-promise">Promise Merchant</span>
+                </div>
+                <div class="shame-card glass-card">
+                    <div class="shame-rank">#4 The Legend</div>
+                    <div class="shame-avatar">🤡</div>
+                    <div class="shame-name">James B.</div>
+                    <div class="shame-amount">£180</div>
+                    <div class="shame-detail">For: "Literally everything"</div>
+                    <div class="shame-detail" style="margin-top: 4px; color: var(--accent-purple);">🏆 4 reminders sent</div>
+                    <span class="shame-badge badge-legend">Legendary Debtor</span>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top: 28px;">
+                <button class="btn btn-ghost" onclick="showSection('create')" id="shame-cta-btn">
+                    🎯 Don't Let Your Debtor Get Away — Create Now
+                </button>
+            </div>
+        </div>
+
         <!-- Testimonials -->
         <div class="section-header animate-in" id="testimonials" style="margin-top: 100px;">
             <span class="section-tag">Testimonials</span>
-            <h2 class="section-title">Loved by creditors everywhere</h2>
+            <h2 class="section-title">Loved by creditors everywhere 💪</h2>
         </div>
         
         <div class="testimonial-grid animate-in">
@@ -166,7 +236,7 @@
                 <p class="testimonial-text">"Sent my flatmate the Nuclear level. He Zelle'd me in 4 minutes. Literally did not speak for 2 days. Worth it."</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">A</div>
-                    <div><strong>Ankit R.</strong><br><span class="text-muted">Recovered ₹2,400</span></div>
+                    <div><strong>Ankit R.</strong><br><span class="text-muted">Recovered ₹2,400 💰</span></div>
                 </div>
             </div>
             <div class="testimonial-card glass-card">
@@ -174,33 +244,60 @@
                 <p class="testimonial-text">"I used the Gentle level on my sister. She laughed, called me dramatic, then sent the money 3 hours later. This thing works."</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">P</div>
-                    <div><strong>Priya S.</strong><br><span class="text-muted">Recovered $75</span></div>
+                    <div><strong>Priya S.</strong><br><span class="text-muted">Recovered $75 💰</span></div>
                 </div>
             </div>
             <div class="testimonial-card glass-card">
                 <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-text">"The countdown timer on the FINAL NOTICE had my coworker physically panicking. Best $50 I ever recovered."</p>
+                <p class="testimonial-text">"The countdown timer on FINAL NOTICE had my coworker physically panicking. He even sent ₹50 extra as 'interest'. Genius."</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">J</div>
-                    <div><strong>James K.</strong><br><span class="text-muted">Recovered $50</span></div>
+                    <div><strong>James K.</strong><br><span class="text-muted">Recovered $50 💰</span></div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Featured In (social proof logos) -->
+        <div class="featured-in animate-in">
+            <p>Trending on</p>
+            <div class="featured-logos">
+                <span>Reddit</span>
+                <span>•</span>
+                <span>Twitter / X</span>
+                <span>•</span>
+                <span>LinkedIn</span>
+                <span>•</span>
+                <span>WhatsApp Groups</span>
+                <span>•</span>
+                <span>Instagram</span>
             </div>
         </div>
 
         <!-- Final CTA -->
         <div class="final-cta animate-in" style="margin-top: 100px;">
+            <div class="urgency-banner" style="margin-bottom: 28px; display: inline-flex;">
+                ⚡ Free forever. No credit card. No signup.
+            </div>
             <h2 class="section-title" style="margin-bottom: 16px;">Ready to get your money back?</h2>
-            <p class="text-muted" style="margin-bottom: 32px;">Free. No sign-up. Takes 30 seconds.</p>
-            <button class="btn btn-primary btn-lg" onclick="showSection('create')">
-                Create Your Reminder
+            <p class="text-muted" style="margin-bottom: 36px; font-size: 1rem;">Takes 30 seconds. Your debtor will never see it coming.</p>
+            <button class="btn btn-cta-pulse btn-lg" onclick="showSection('create')" id="final-cta-btn">
+                💸 Create Your Free Reminder
                 <span class="btn-arrow">→</span>
             </button>
+            <p class="text-muted" style="margin-top: 16px; font-size: 0.78rem;">
+                Join 12,847+ people who already got paid 🎉
+            </p>
         </div>
     </section>
 
-    <!-- ===== CREATE FORM ===== -->
+    <!-- ========== CREATE FORM ========== -->
     <section class="section hidden" id="create-section">
         <div class="create-container glass-card">
+            <div style="text-align:center; margin-bottom: 28px;">
+                <div style="font-size: 2rem; margin-bottom: 8px;">✍️</div>
+                <h2 class="heading-outfit" style="font-size: 1.5rem; font-weight: 800;">Build Your Reminder</h2>
+                <p class="text-muted" style="font-size: 0.85rem; margin-top: 6px;">30 seconds to maximum guilt</p>
+            </div>
             <div class="form-progress">
                 <div class="progress-step active" id="prog-1"><span>1</span> Names</div>
                 <div class="progress-line"><div class="progress-line-fill" id="prog-fill"></div></div>
@@ -212,21 +309,23 @@
             <div id="reminder-form">
                 <!-- Step 1 -->
                 <div class="form-step active" id="step-1">
-                    <h3 class="form-step-title">Who owes you?</h3>
+                    <h3 class="form-step-title">Who owes you? 🤔</h3>
                     <div class="form-group">
-                        <label>Your Name</label>
-                        <input type="text" id="v-from" placeholder="e.g. Vimal">
+                        <label>Your Name (The Creditor)</label>
+                        <input type="text" id="v-from" placeholder="e.g. Vimal" autocomplete="name">
                     </div>
                     <div class="form-group">
-                        <label>Their Name (The Debtor)</label>
-                        <input type="text" id="v-to" placeholder="e.g. Rahul">
+                        <label>Their Name (The Debtor 😈)</label>
+                        <input type="text" id="v-to" placeholder="e.g. Rahul — the one who owes you" autocomplete="off">
                     </div>
-                    <button class="btn btn-primary" style="width: 100%" onclick="goStep(2)">Continue →</button>
+                    <button class="btn btn-cta-pulse" style="width: 100%; justify-content:center;" onclick="goStep(2)" id="step1-next-btn">
+                        Continue →
+                    </button>
                 </div>
 
                 <!-- Step 2 -->
                 <div class="form-step" id="step-2">
-                    <h3 class="form-step-title">The debt details</h3>
+                    <h3 class="form-step-title">The debt details 💰</h3>
                     <div style="display:flex; gap:16px;">
                         <div class="form-group" style="flex:1;">
                             <label>Currency</label>
@@ -235,11 +334,13 @@
                                 <option value="€">€ EUR</option>
                                 <option value="₹" selected>₹ INR</option>
                                 <option value="£">£ GBP</option>
+                                <option value="¥">¥ JPY</option>
+                                <option value="A$">A$ AUD</option>
                             </select>
                         </div>
                         <div class="form-group" style="flex:2;">
-                            <label>Amount</label>
-                            <input type="number" id="v-amt" placeholder="e.g. 500">
+                            <label>Amount Owed</label>
+                            <input type="number" id="v-amt" placeholder="e.g. 500" min="1">
                         </div>
                     </div>
                     <div class="form-group">
@@ -251,14 +352,14 @@
                         <input type="date" id="v-date">
                     </div>
                     <div style="display:flex; gap:16px;">
-                        <button class="btn btn-ghost" style="flex:1;" onclick="goStep(1)">← Back</button>
-                        <button class="btn btn-primary" style="flex:2;" onclick="goStep(3)">Continue →</button>
+                        <button class="btn btn-ghost" style="flex:1;" onclick="goStep(1)" id="step2-back-btn">← Back</button>
+                        <button class="btn btn-cta-pulse" style="flex:2; justify-content:center;" onclick="goStep(3)" id="step2-next-btn">Continue →</button>
                     </div>
                 </div>
 
                 <!-- Step 3 -->
                 <div class="form-step" id="step-3">
-                    <h3 class="form-step-title">Choose your weapon</h3>
+                    <h3 class="form-step-title">Choose your weapon ⚔️</h3>
                     <div class="sass-selector">
                         <label class="sass-option"><input type="radio" name="vsass" value="1"><div class="sass-content"><span class="sass-emoji">😇</span><span class="sass-label">Gentle</span></div></label>
                         <label class="sass-option"><input type="radio" name="vsass" value="2"><div class="sass-content"><span class="sass-emoji">😏</span><span class="sass-label">Passive</span></div></label>
@@ -268,24 +369,24 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>Payment Link <span class="text-muted">(Optional)</span></label>
-                        <input type="text" id="v-pay" placeholder="upi://pay?... or PayPal.me/...">
+                        <label>Payment Link <span class="text-muted">(Optional — for direct pay)</span></label>
+                        <input type="text" id="v-pay" placeholder="UPI ID, PayPal.me/... or PhonePe link">
                     </div>
                     
                     <div class="form-group">
                         <label>Debtor's Language 🌐</label>
-                        <select id="v-lang" style="width:100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255, 255, 255, 0.05); color: var(--text-primary); font-size: 1rem;">
+                        <select id="v-lang" style="width:100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; background: rgba(255, 255, 255, 0.04); color: var(--text-primary); font-size: 1rem;">
                             <optgroup label="Global Languages">
-                                <option value="en" selected>English</option>
-                                <option value="es">Spanish (Español)</option>
-                                <option value="fr">French (Français)</option>
-                                <option value="de">German (Deutsch)</option>
-                                <option value="zh">Chinese (中文)</option>
-                                <option value="ar">Arabic (العربية)</option>
-                                <option value="ru">Russian (Русский)</option>
-                                <option value="pt">Portuguese (Português)</option>
+                                <option value="en" selected>🌍 English</option>
+                                <option value="es">🇪🇸 Spanish (Español)</option>
+                                <option value="fr">🇫🇷 French (Français)</option>
+                                <option value="de">🇩🇪 German (Deutsch)</option>
+                                <option value="zh">🇨🇳 Chinese (中文)</option>
+                                <option value="ar">🇸🇦 Arabic (العربية)</option>
+                                <option value="ru">🇷🇺 Russian (Русский)</option>
+                                <option value="pt">🇧🇷 Portuguese (Português)</option>
                             </optgroup>
-                            <optgroup label="Indian Languages">
+                            <optgroup label="🇮🇳 Indian Languages">
                                 <option value="hi">Hindi (हिंदी)</option>
                                 <option value="bn">Bengali (বাংলা)</option>
                                 <option value="te">Telugu (తెలుగు)</option>
@@ -299,52 +400,62 @@
                     </div>
                     
                     <div style="display:flex; gap:16px;">
-                        <button class="btn btn-ghost" style="flex:1;" onclick="goStep(2)">← Back</button>
-                        <button class="btn btn-primary" style="flex:2;" onclick="generate()">🚀 Generate Link</button>
+                        <button class="btn btn-ghost" style="flex:1;" onclick="goStep(2)" id="step3-back-btn">← Back</button>
+                        <button class="btn btn-cta-pulse" style="flex:2; justify-content:center;" onclick="generate()" id="generate-btn">🚀 Generate Link</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== RESULT ===== -->
+    <!-- ========== RESULT ========== -->
     <section class="section hidden" id="result-section">
         <div class="result-container glass-card">
-            <div class="result-success-icon">✅</div>
-            <h2 class="heading-outfit" style="font-size: 1.8rem; margin-bottom: 12px;">Your Reminder is Ready</h2>
-            <p class="text-muted" style="margin-bottom: 32px;">Share this link with <strong id="res-t" style="color:var(--text-primary);"></strong> and watch the magic happen.</p>
+            <div class="result-success-icon">🎯</div>
+            <h2 class="heading-outfit" style="font-size: 1.9rem; margin-bottom: 12px;">Your Reminder is Ready!</h2>
+            <p class="text-muted" style="margin-bottom: 32px;">Share this link with <strong id="res-t" style="color:var(--accent-purple);"></strong> and watch the magic happen. 😈</p>
             
             <div class="link-box">
                 <input type="text" id="res-link" readonly onclick="this.select()">
                 <button class="btn btn-primary" id="copy-btn" onclick="copyLink()">Copy</button>
             </div>
+
+            <!-- Viral Tip -->
+            <div style="background: rgba(191,90,242,0.08); border: 1px solid rgba(191,90,242,0.2); border-radius: 14px; padding: 16px; margin-bottom: 24px; text-align: left;">
+                <p style="font-size: 0.82rem; color: var(--accent-purple); font-weight: 600; margin-bottom: 4px;">💡 Pro Tip for Maximum Impact</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">Send this link on WhatsApp, then put it in the group chat after 24 hours if unpaid. Social pressure is your friend.</p>
+            </div>
             
             <div class="share-grid" style="grid-template-columns: repeat(5, 1fr);">
-                <button class="share-btn" onclick="preview()">
+                <button class="share-btn" onclick="preview()" id="share-preview-btn">
                     <span class="share-icon">👁️</span>
                     <span>Preview</span>
                 </button>
-                <button class="share-btn" onclick="shareWhatsApp()">
+                <button class="share-btn" onclick="shareWhatsApp()" id="share-whatsapp-btn">
                     <span class="share-icon">💬</span>
                     <span>WhatsApp</span>
                 </button>
-                <button class="share-btn" onclick="shareTelegram()">
+                <button class="share-btn" onclick="shareTelegram()" id="share-telegram-btn">
                     <span class="share-icon">✈️</span>
                     <span>Telegram</span>
                 </button>
-                <button class="share-btn" onclick="shareTwitter()">
+                <button class="share-btn" onclick="shareTwitter()" id="share-twitter-btn">
                     <span class="share-icon">𝕏</span>
                     <span>Twitter</span>
                 </button>
-                <button class="share-btn" onclick="shareEmail()">
+                <button class="share-btn" onclick="shareEmail()" id="share-email-btn">
                     <span class="share-icon">📧</span>
                     <span>Email</span>
                 </button>
             </div>
+
+            <div style="text-align:center; margin-top: 28px;">
+                <button class="btn btn-ghost btn-sm" onclick="goHome()">← Create Another</button>
+            </div>
         </div>
     </section>
 
-    <!-- ===== REMINDER VIEWER ===== -->
+    <!-- ========== REMINDER VIEWER ========== -->
     <section class="section hidden" id="reminder-section">
         <div class="reminder-container glass-card" id="rem-card">
             <div class="reminder-body">
@@ -393,32 +504,33 @@
                 </div>
 
                 <div class="reminder-cta">
-                    <a id="r-pay" href="#" target="_blank" class="btn btn-primary btn-lg" style="text-decoration:none;">
+                    <a id="r-pay" href="#" target="_blank" class="btn btn-cta-pulse btn-lg" style="text-decoration:none; width:100%; justify-content:center;">
                         <span id="lbl-settle_btn">💳 Settle Balance Now</span>
                     </a>
                     
-                    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('postpone-modal').classList.add('show')" style="margin-top:16px;">
-                        I Can't Pay Yet (Request Extension)
+                    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('postpone-modal').classList.add('show')" style="margin-top:16px; width:100%; justify-content:center;">
+                        I Can't Pay Yet (Request Extension) 🏳️
                     </button>
                     
                     <p class="reminder-warn" id="r-warn"></p>
                 </div>
 
-                <div class="reminder-footer" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--glass-border); display: flex; flex-direction: column; align-items: center; gap: 12px;">
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Owe someone money? Or need to collect?</p>
-                    <button class="btn" style="background: linear-gradient(135deg, #bf5af2, #ff453a); color: white; border: none; font-weight: 700; width: 100%; justify-content: center; box-shadow: 0 4px 15px rgba(191, 90, 242, 0.3);" onclick="window.location.href = window.location.pathname;">
-                        🚀 Create Your Own Reminder For Free
+                <!-- Viral CTA at bottom of reminder -->
+                <div style="margin-top:28px; padding-top:24px; border-top:1px solid var(--glass-border); display:flex; flex-direction:column; align-items:center; gap:12px;">
+                    <p style="font-size:0.85rem; color:var(--text-secondary);">Someone owes YOU money too?</p>
+                    <button class="btn btn-cta-pulse" style="width:100%; justify-content:center;" onclick="window.location.href = window.location.pathname;" id="viral-create-btn">
+                        🚀 Create Your Own FREE Reminder
                     </button>
-                    <p style="font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-top: 4px;">Powered by WhereMyMoney</p>
+                    <p style="font-size:0.72rem; color:rgba(255,255,255,0.25);">Powered by WhereMyMoney — Free Forever</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Postpone Modal -->
+    <!-- ========== POSTPONE MODAL ========== -->
     <div class="modal" id="postpone-modal">
         <div class="modal-content glass-card">
-            <h3 style="font-family: 'Outfit'; font-size:1.4rem; margin-bottom: 8px;">Request Extension 🏳️</h3>
+            <h3 style="font-family: 'Outfit'; font-size:1.5rem; margin-bottom: 8px;">Request Extension 🏳️</h3>
             <p class="text-muted" style="margin-bottom: 24px; font-size:0.9rem; line-height:1.5;">Submit a formal promise to your creditor. Note: This will generate a message for you to send to them.</p>
             
             <div class="form-group">
@@ -433,34 +545,79 @@
             
             <div style="display:flex; gap:12px; margin-top:24px;">
                 <button class="btn btn-ghost" style="flex:1;" onclick="document.getElementById('postpone-modal').classList.remove('show')">Cancel</button>
-                <button class="btn btn-primary" style="flex:2;" onclick="submitPromise()">Send Promise 📝</button>
+                <button class="btn btn-cta-pulse" style="flex:2; justify-content:center;" onclick="submitPromise()">Send Promise 📝</button>
             </div>
         </div>
     </div>
 
-    <!-- Viral Tip / Buy Me a Chai (UPI Integration) -->
+    <!-- ========== SOCIAL PROOF TICKER ========== -->
+    <div class="social-proof-ticker" id="social-ticker" style="display:none;">
+        <div class="ticker-card" style="position:relative;">
+            <span class="ticker-close" onclick="closeTicker()">✕</span>
+            <div class="ticker-avatar" id="ticker-avatar">R</div>
+            <div class="ticker-content">
+                <div class="ticker-name" id="ticker-name">Rahul S.</div>
+                <div class="ticker-text" id="ticker-text">just created a ☢️ Nuclear reminder for ₹3,200</div>
+                <div class="ticker-time" id="ticker-time">● 2 min ago</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MOBILE STICKY CTA ========== -->
+    <div class="mobile-sticky-cta" id="mobile-sticky-cta">
+        <button class="btn btn-cta-pulse" onclick="showSection('create')" id="mobile-cta-btn">
+            💸 Create Free Reminder — Takes 30 Seconds
+        </button>
+    </div>
+
+    <!-- ========== CHAI FLOAT (Support Widget) ========== -->
     <div class="chai-float" onclick="toggleChai()">
         <span class="chai-emoji">☕</span>
         <div class="chai-card glass-card" id="chai-card">
             <h4>Buy the Dev a Chai? ☕</h4>
-            <p>Loved the drama? Support the creator of WhereMyMoney!</p>
+            <p>Loved the drama? Support the creator of WhereMyMoney — built with love and passive aggression!</p>
             <div class="upi-box">
                 <code id="upi-id">vkvimal14@okhdfcbank</code>
                 <button class="btn btn-primary btn-sm" onclick="copyUPI(event)">Copy</button>
             </div>
-            <a href="upi://pay?pa=vkvimal14@okhdfcbank&pn=Vimal&cu=INR" class="btn btn-ghost btn-sm" style="width:100%; margin-top:12px; font-size:0.75rem;">Pay via UPI App 📱</a>
+            <a href="upi://pay?pa=vkvimal14@okhdfcbank&pn=Vimal&cu=INR" class="btn btn-ghost btn-sm" style="width:100%; margin-top:12px; font-size:0.75rem; justify-content:center;">
+                📱 Pay via UPI App
+            </a>
         </div>
     </div>
 
-    <!-- Confetti Canvas -->
+    <!-- ========== CONFETTI CANVAS ========== -->
     <canvas id="confetti-canvas"></canvas>
 
+    <!-- ========== FOOTER ========== -->
     <footer>
         <div class="footer-content">
-            <p>Built with 😤 Precision and Passive-Aggression</p>
-            <div class="footer-links">
-                <a href="#" onclick="showSection('create'); return false;" class="footer-link">Create Reminder</a>
+            <div style="font-family:'Outfit'; font-size:1.3rem; font-weight:800; margin-bottom:8px; letter-spacing:-0.02em;">
+                💸 WhereMyMoney
             </div>
+            <p>Built with 😤 precision and passive-aggression. Your debts will not be forgotten.</p>
+            
+            <div class="footer-links" style="margin-top: 20px;">
+                <a href="#" onclick="showSection('create'); return false;" class="footer-link">Create Reminder</a>
+                <span class="footer-dot">●</span>
+                <a href="#how" onclick="handleNavClick(event,'landing','how')" class="footer-link">How It Works</a>
+                <span class="footer-dot">●</span>
+                <a href="#testimonials" onclick="handleNavClick(event,'landing','testimonials')" class="footer-link">Reviews</a>
+                <span class="footer-dot">●</span>
+                <a href="#shame" onclick="handleNavClick(event,'landing','shame')" class="footer-link">Hall of Shame</a>
+            </div>
+
+            <!-- Social media links -->
+            <div class="footer-social">
+                <a href="https://twitter.com/wheremymoney_" target="_blank" title="Twitter/X" id="footer-twitter">𝕏</a>
+                <a href="https://instagram.com/wheremymoney_" target="_blank" title="Instagram" id="footer-instagram">📸</a>
+                <a href="https://t.me/wheremymoney" target="_blank" title="Telegram" id="footer-telegram">✈️</a>
+                <a href="https://github.com/vkvimal14/wheremymoney" target="_blank" title="GitHub" id="footer-github">⌨️</a>
+            </div>
+
+            <p style="margin-top: 24px; font-size: 0.75rem; color: rgba(255,255,255,0.2);">
+                © 2026 WhereMyMoney. No actual legal action taken. Probably.
+            </p>
         </div>
     </footer>
 
